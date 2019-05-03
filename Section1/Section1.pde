@@ -41,17 +41,25 @@ class Visualizer {
 
     //???WRITE THIS METHOD!!!
     //THESE ARE WRONG: They just illustrate how they could look
+    // width of each rectangle is calculated based on number of rectangles
     int width = 400 / values.length;
+    // for each element in values
     for (int i = 0; i < values.length; i++){
-      // color green if height is close to 0
-      if ( Math.abs(values[i]) >= 0 && Math.abs(values[i]) < 33){
-        fill(255,0,0);
-      }
-      else if (Math.abs(values[i]) >= 33 && Math.abs(values[i]) < 66){
-        fill(0,0,255);
-      }
-      else if (Math.abs(values[i]) >= 66 && Math.abs(values[i] <= 100){
+      // color green if height is between 50 and 100
+      if ( values[i] > 50 && values[i] <= 100){
         fill(0,255,0);
+      }
+      // color yellow if height is between 0 and 50
+      else if (values[i] > 0 && values[i] <= 50){
+        fill(255,255,0);
+      }
+      // color orange if height is between -50 and 0
+      else if (values[i] > -50 && values[i] <= 0){
+        fill(204, 102, 0);
+      }
+      // color red if height is between -100 and -50
+      else if (values[i] >= -100 && values[i] <= -50){
+        fill(255,0,0);
       }
       if (values[i] < 0){
         rect(x+ width*i, y+ 100, width, Math.abs(values[i]) );
@@ -73,7 +81,11 @@ class Visualizer {
   void update() {
     //???WRITE THIS METHOD!!!
     for (int i = 0; i < values.length; i++) {
-     // values[i] += speeds[i];
+      
+      values[i] += speeds[i];
+      if (values[i] >= 100 || values[i] <= -100){
+        speeds[i] *= -1;
+      }
       //??? keep them values between max/min value
 
       //??? reverse the speeds so they oscillate up/down when they reach max/min
