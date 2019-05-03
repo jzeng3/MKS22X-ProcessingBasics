@@ -43,12 +43,20 @@ class Visualizer {
     //THESE ARE WRONG: They just illustrate how they could look
     int width = 400 / values.length;
     for (int i = 0; i < values.length; i++){
-      if (values[i] < 0){
+      // color green if height is close to 0
+      if ( Math.abs(values[i]) >= 0 && Math.abs(values[i]) < 33){
         fill(255,0,0);
+      }
+      else if (Math.abs(values[i]) >= 33 && Math.abs(values[i]) < 66){
+        fill(0,0,255);
+      }
+      else if (Math.abs(values[i]) >= 66 && Math.abs(values[i] <= 100){
+        fill(0,255,0);
+      }
+      if (values[i] < 0){
         rect(x+ width*i, y+ 100, width, Math.abs(values[i]) );
       }
       else{
-        fill(0,255,0);
         rect(x + width*i, y + 100 - values[i], width, Math.abs(values[i]) );
       }
     }
