@@ -16,15 +16,33 @@ void setup() {
 */
 void gasket(int levels, float v1x, float v1y, float v2x, float v2y, float v3x, float v3y) {
     //YOU WRITE THIS METHOD!
-    fill(0,255,0);
     if (levels == 0){
-      triangle(v1x,v1y,v2x,v2y,v3x,v3y);
-      return;
+      fill(255); 
+      triangle(v1x,v1y, v2x,v2y, v3x,v3y);
     }
-    fill(255);
-    gasket(levels - 1, (v1x + v2x) / 2, (v1y + v2y) / 2, (v1x + v3x) / 2, (v1y + v3y) / 2, (v2x + v3x) / 2, (v2y + v3y) / 2 );
+    else{
+    gasketH(0, levels, v1x, v1y, v2x, v2y, v3x, v3y);
+    }
 }
 
+// helper method to draw the inner triangles
+void gasketH(int level, int levels, float v1x, float v1y, float v2x, float v2y, float v3x, float v3y){
+
+  // if highest level is reached, draw one triangle
+  if (level == levels){
+    fill(0);
+    triangle(v1x,v1y,v2x,v2y,v3x,v3y);
+  }
+  // otherwise divide triangle into three smaller triangles and update current level
+  else{
+    fill(0,0,255);
+    gasketH(level+1, levels, v1x, v1y, (v1x + v2x) / 2, v2y, (v1x + v3x) / 2, (v1y + v3y) / 2);
+    fill(0,255,0);
+    gasketH(level+1, levels, (v1x + v2x) / 2, v2y, v2x, v2y, (v2x + v3x), (v2y + v3y) / 2);
+    fill(255,0,0);
+    gasketH(level+1, levels, (v1x + v3x) / 2, (v1y + v3y) / 2, (v2x + v3x), (v2y + v3y) / 2, v3x, v3y);
+  }
+}
 void draw() { 
   background(50);  
   
