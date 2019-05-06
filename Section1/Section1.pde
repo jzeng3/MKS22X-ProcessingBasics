@@ -18,7 +18,7 @@ class Visualizer {
     this.y = y;
     width = 400;
     height = 200;
-    size = 10;
+    size = 25;
     values = new float[size];
     speeds = new float[size];
     for (int i = 0; i < values.length; i++) {
